@@ -106,7 +106,7 @@ int main()
   X a;
   fn(a); // compiler error, argument is an lvalue
 
-  fn(X()); // works, argument is an lvalue
+  fn(X()); // works, argument is an rvalue
 }
 {% endhighlight %}
 
