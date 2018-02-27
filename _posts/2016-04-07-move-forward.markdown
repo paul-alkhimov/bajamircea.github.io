@@ -71,16 +71,16 @@ ones][value-category-ref] (e.g. `void` has a category with no identity and that
 can't be moved from), but I'm going to skip over them in this article.
 
 
-## References as function arguments (are lvalues)
+## References as function parameters (are lvalues)
 
-References as function arguments are relevant here because they allow us to
+References as function parameters are relevant here because they allow us to
 bind to arguments depending on their value category.
 
 There are two types of reference declarations in C++. The pre-C++ 11 is called
 now `lvalue reference` (and uses one `&`), and the new C++ 11 called `rvalue
 reference` (that looks like `&&`).
 
-If a function has `lvalue reference` argument, then it can be called it with an
+If a function has `lvalue reference` parameter, then it can be called with an
 `lvalue`, but not an `rvalue`.
 
 {% highlight c++ linenos %}
@@ -89,13 +89,13 @@ void fn(X &) { std::cout<< "X &\n"; }
 int main()
 {
   X a;
-  fn(a); // works, argument is an lvalue
+  fn(a); // works, argument is an lvalue, parameter too
 
-  fn(X()); // compiler error, argument is an rvalue
+  fn(X()); // compiler error, argument is an rvalue but parameter is lvalue
 }
 {% endhighlight %}
 
-Similarly if a function has a `rvalue reference` argument, then it can be
+Similarly if a function has a `rvalue reference` parameter, then it can be
 called with an `rvalue`, but not an `lvalue`.
 
 {% highlight c++ linenos %}
@@ -104,9 +104,9 @@ void fn(X &&) { std::cout<< "X &&\n"; }
 int main()
 {
   X a;
-  fn(a); // compiler error, argument is an lvalue
+  fn(a); // compiler error, argument is an lvalue, but parameter is rvalue
 
-  fn(X()); // works, argument is an rvalue
+  fn(X()); // works, both argument and parameter is an rvalue
 }
 {% endhighlight %}
 
