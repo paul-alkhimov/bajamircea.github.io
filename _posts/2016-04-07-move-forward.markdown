@@ -387,7 +387,7 @@ constexpr T&& forward(typename remove_reference<T>::type & arg) noexcept
 template<typename T>
 constexpr T&& forward(typename remove_reference<T>::type && arg) noexcept
 {
-  static_assert(!is_lvalue_reference<T>::value, "invalid lvalue to rvalue conversion");
+  static_assert(!is_lvalue_reference<T>::value, "invalid rvalue to lvalue conversion");
   return static_cast<T&&>(arg);
 }
 {% endhighlight %}
